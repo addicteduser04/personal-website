@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sifeddine EL KADIRI — quantitative finance researcher, builder, and ENSIAS engineering student.">
+  <title>Sifeddine EL KADIRI — Quantitative Finance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="nav-shell">
+    <a class="mark" href="#top" aria-label="Sifeddine EL KADIRI, home">SEK<span>.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#contact">Contact</a>
+    </nav>
+    <span class="availability"><i></i> Rabat, MA</span>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <canvas id="signal-canvas" aria-label="Animated noisy observations resolving into a fitted yield curve"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span>OBS_001</span> / SIGNAL EXTRACTION</p>
+        <h1>I find the curve<br>inside the <em>noise.</em></h1>
+        <p class="intro">I’m Sifeddine EL KADIRI — a finance and computer science engineering student building models for markets, from Moroccan sovereign yield curves to AI-assisted investing.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">Explore the work <span>↘</span></a>
+          <a class="text-link" href="https://www.linkedin.com/in/sifeddine-el-kadiri" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+        </div>
+      </div>
+      <div class="curve-readout" aria-hidden="true">
+        <span>FIT</span><strong id="fit-value">0.984</strong><small>R² / NELSON–SIEGEL</small>
+      </div>
+      <p class="gesture" aria-hidden="true">MOVE TO DISTURB <span>→</span></p>
+    </section>
+
+    <section class="about bone" id="about">
+      <div class="section-index">01 / ABOUT</div>
+      <div class="about-lead reveal">
+        <p class="kicker">THE HUMAN BEHIND THE MODEL</p>
+        <h2>I like problems where the answer is present, but buried.</h2>
+      </div>
+      <div class="about-copy reveal">
+        <p>I study Finance & Computer Science Engineering at ENSIAS in Rabat. Right now, I’m researching the term structure of Moroccan sovereign debt at Sterling Asset Management.</p>
+        <p>I also founded SaifInvest, an AI-powered research platform for the Casablanca Stock Exchange. Away from the terminal, I day trade and play chess—two more places where patience matters more than noise.</p>
+        <div class="facts" aria-label="Quick facts">
+          <span><b>03</b> languages</span><span><b>01</b> market focus</span><span><b>∞</b> questions</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="section-heading reveal">
+        <div class="section-index">02 / EXPERIENCE</div>
+        <h2>Where I’ve tested<br>my thinking.</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="date">CURRENT</div><div class="node"></div>
+          <div class="role"><p>STERLING ASSET MANAGEMENT</p><h3>Fixed Income Quantitative Research Intern</h3><p>I build term-structure models for Moroccan sovereign debt, turn raw bond data into fitted curves, and test what the residuals have to say.</p></div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="date">PREVIOUS</div><div class="node"></div>
+          <div class="role"><p>AKWA GROUP</p><h3>Finance Intern</h3><p>I worked close to operating and financial data, translating company performance into models that could support real decisions.</p></div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="date">ONGOING</div><div class="node"></div>
+          <div class="role"><p>SAIFINVEST</p><h3>Founder & Builder</h3><p>I’m building the research product I wanted as a Moroccan investor: local market data, serious analysis, and AI that helps explain rather than obscure.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab bone" aria-labelledby="lab-title">
+      <div class="lab-copy reveal">
+        <div class="section-index">INTERACTIVE / MODEL</div>
+        <p class="kicker">TOUCH THE THESIS</p>
+        <h2 id="lab-title">Shape a yield curve.</h2>
+        <p>Nelson–Siegel compresses a term structure into three interpretable forces. Move them and watch the curve respond.</p>
+        <div class="controls">
+          <label>Level <output id="level-out">4.1%</output><input id="level" type="range" min="2" max="7" value="4.1" step="0.1"></label>
+          <label>Slope <output id="slope-out">−1.2</output><input id="slope" type="range" min="-4" max="4" value="-1.2" step="0.1"></label>
+          <label>Curvature <output id="curve-out">2.4</output><input id="curve" type="range" min="-4" max="4" value="2.4" step="0.1"></label>
+        </div>
+      </div>
+      <div class="chart-wrap reveal">
+        <svg id="ns-chart" viewBox="0 0 700 380" role="img" aria-label="Interactive Nelson-Siegel yield curve">
+          <g class="chart-grid"></g><path class="area" d=""></path><path class="line" d=""></path><g class="points"></g>
+        </svg>
+        <div class="chart-label"><span>YIELD %</span><strong id="ten-year">4.32</strong><small>10Y MODEL</small></div>
+        <div class="maturities" aria-hidden="true"><span>3M</span><span>5Y</span><span>10Y</span><span>20Y</span><span>30Y</span></div>
+      </div>
+    </section>
+
+    <section class="work" id="work">
+      <div class="section-heading reveal"><div class="section-index">03 / SELECTED WORK</div><h2>Evidence,<br>not adjectives.</h2><p>Open a card for the part that mattered.</p></div>
+      <div class="projects">
+        <article class="project featured reveal" tabindex="0">
+          <div class="project-top"><span>01 / PRODUCT</span><span>2025</span></div><div class="project-body"><p class="project-type">AI × CASABLANCA MARKET</p><h3>SaifInvest</h3><p>An investment research platform built around the information reality of the Casablanca Stock Exchange.</p><div class="project-detail"><strong>THE INTERESTING PART</strong><p>Designing AI analysis that stays grounded in sparse, local financial data—not a generic US-market wrapper.</p></div></div><a href="https://github.com/addicteduser04/SaifInvest" target="_blank" rel="noreferrer" aria-label="View SaifInvest on GitHub">View repository <span>↗</span></a>
+        </article>
+        <article class="project reveal" tabindex="0">
+          <div class="project-top"><span>02 / RESEARCH</span><span>PYTHON</span></div><div class="project-body"><p class="project-type">REGIME DETECTION</p><h3>Hidden states,<br>visible edge.</h3><div class="sharpe"><span><small>HMM STRATEGY</small><b>1.099</b></span><i>vs</i><span><small>BENCHMARK</small><b>.756</b></span></div><div class="project-detail"><strong>THE INTERESTING PART</strong><p>The model changes exposure when market behavior changes, rather than pretending one strategy fits every regime.</p></div></div><a href="https://github.com/addicteduser04/AI-Driven-Portfolio-OPtimization-with-Market-Regime-Detection" target="_blank" rel="noreferrer">Read the model <span>↗</span></a>
+        </article>
+        <article class="project reveal" tabindex="0">
+          <div class="project-top"><span>03 / PRICING</span><span>C++ / PY</span></div><div class="project-body"><p class="project-type">DERIVATIVES</p><h3>Black–Scholes<br>engine.</h3><p>A transparent options pricing implementation built to inspect assumptions, Greeks, and sensitivity—not hide them.</p><div class="project-detail"><strong>THE INTERESTING PART</strong><p>Turning the equation into a tool you can interrogate parameter by parameter.</p></div></div><a href="https://github.com/addicteduser04/Black-Scholes-Model" target="_blank" rel="noreferrer">View repository <span>↗</span></a>
+        </article>
+        <article class="project reveal" tabindex="0">
+          <div class="project-top"><span>04 / ML</span><span>EXTREMES</span></div><div class="project-body"><p class="project-type">TAIL RISK</p><h3>When markets<br>break pattern.</h3><p>Machine-learning experiments for detecting extreme market events before they become obvious in hindsight.</p><div class="project-detail"><strong>THE INTERESTING PART</strong><p>Extreme events are rare by definition. The real work is choosing signals without teaching the model to memorize crises.</p></div></div><a href="https://github.com/addicteduser04/Detection-of-extreme-market-events-using-Machine-Learning" target="_blank" rel="noreferrer">Explore research <span>↗</span></a>
+        </article>
+        <article class="project reveal" tabindex="0">
+          <div class="project-top"><span>05 / FIXED INCOME</span><span>RESEARCH</span></div><div class="project-body"><p class="project-type">TERM STRUCTURE</p><h3>From bond data<br>to fitted curve.</h3><p>A Nelson–Siegel and Dynamic Nelson–Siegel pipeline for turning Moroccan sovereign observations into an interpretable term structure.</p><div class="project-detail"><strong>THE INTERESTING PART</strong><p>The fit is only the start. I care about stability over time, the meaning of each factor, and what the residuals reveal.</p></div></div><span class="project-status">CURRENT RESEARCH <b>●</b></span>
+        </article>
+        <article class="project reveal" tabindex="0">
+          <div class="project-top"><span>06 / VALUATION</span><span>DCF</span></div><div class="project-body"><p class="project-type">CMGP GROUP</p><h3>Value from<br>first principles.</h3><p>A DCF valuation built from operating drivers, explicit assumptions, and sensitivity—not a single magic multiple.</p><div class="project-detail"><strong>THE INTERESTING PART</strong><p>Making uncertainty visible: mapping how the answer moves when growth, margins, WACC, and terminal value change.</p></div></div><span class="project-status">FINANCIAL MODEL <b>●</b></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="skills bone" id="skills">
+      <div class="section-index">04 / HOW I WORK</div>
+      <div class="skill-row reveal"><span>01</span><h3>I model markets.</h3><p>Fixed income · valuation · derivatives · portfolio construction</p></div>
+      <div class="skill-row reveal"><span>02</span><h3>I interrogate data.</h3><p>Python · SQL · pandas · scikit-learn · time series</p></div>
+      <div class="skill-row reveal"><span>03</span><h3>I ship tools.</h3><p>Git · APIs · Streamlit · financial dashboards · research pipelines</p></div>
+      <div class="skill-row reveal"><span>04</span><h3>I explain findings.</h3><p>English · French · Arabic · clean charts · honest assumptions</p></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="eyebrow"><span>OPEN CHANNEL</span> / 2026</p>
+      <h2 class="reveal">Let’s talk<br><em>markets.</em></h2>
+      <p class="contact-copy reveal">If you’re working on quantitative research, fixed income, or better tools for African markets, I’d like to hear what you’re seeing.</p>
+      <div class="contact-links reveal"><a href="https://www.linkedin.com/in/sifeddine-el-kadiri" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a><a href="https://github.com/addicteduser04" target="_blank" rel="noreferrer">GitHub <span>↗</span></a><a href="https://github.com/addicteduser04/Backtesting-Trading-Strategies-using-Machine-Learning" target="_blank" rel="noreferrer">Trading research <span>↗</span></a></div>
+      <footer><span>© <span id="year"></span> SIFEDDINE EL KADIRI</span><span>BUILT AROUND THE SIGNAL</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+</body>
+</html>

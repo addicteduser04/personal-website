@@ -1,71 +1,63 @@
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const canvas = document.querySelector('#signal-canvas');
-const ctx = canvas.getContext('2d');
-let width, height, pointer = { x: -999, y: -999 }, start = performance.now();
+(() => {
+  "use strict";
+  const { profiles, projects } = window.PORTFOLIO_DATA;
+  const main = document.querySelector("main");
+  const bySlug = Object.fromEntries(projects.map(p => [p.slug, p]));
+  const labels = {all:"All",quant:"Quant Finance",data:"Data Science & AI",digital:"IT & Digital Transformation",fullstack:"Full-Stack Development"};
+  const profileKey = path => path === "/quant" ? "quant" : path === "/data-ai" ? "data" : path === "/digital-transformation" ? "digital" : null;
+  const cleanPath = () => (location.pathname.replace(/\/$/, "") || "/");
+  const escapeHtml = value => String(value).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+  const chips = values => `<div class="chips">${values.map(v=>`<span>${escapeHtml(v)}</span>`).join("")}</div>`;
+  const projectCard = (p, i=0) => `<article class="project-card reveal" style="--i:${i}">
+    <a class="card-hit route-link" href="/projects/${p.slug}" aria-label="Read ${escapeHtml(p.title)} case study"></a>
+    <div class="card-top"><span>${String(i+1).padStart(2,"0")} / ${escapeHtml(labels[p.categories[0]] || "Project")}</span><span>${p.date}</span></div>
+    ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.imageAlt||"")}" loading="lazy" width="900" height="540">` : `<div class="card-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>`}
+    <div class="card-copy"><p class="kicker">${escapeHtml(p.status)}</p><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.summary)}</p>${chips(p.stack.slice(0,4))}</div>
+    <span class="card-arrow" aria-hidden="true">↗</span></article>`;
 
-function resize() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  width = canvas.clientWidth; height = canvas.clientHeight;
-  canvas.width = width * dpr; canvas.height = height * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-function curveY(x) {
-  const t = x / width * 8 + .12;
-  const ns = .48 - .21 * ((1 - Math.exp(-t / 1.7)) / (t / 1.7)) + .25 * (((1 - Math.exp(-t / 1.7)) / (t / 1.7)) - Math.exp(-t / 1.7));
-  return height * (.76 - ns * .72);
-}
-function draw(time) {
-  ctx.clearRect(0, 0, width, height);
-  const settle = reduced ? 1 : Math.min(1, (time - start) / 2200);
-  const disturbance = Math.max(0, 1 - Math.hypot(pointer.x - width / 2, pointer.y - height / 2) / width) * .8;
-  ctx.lineWidth = 2; ctx.strokeStyle = '#a8e063'; ctx.beginPath();
-  for (let x = 0; x <= width; x += 5) {
-    const y = curveY(x); x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  function shell(content){ return `${content}${footer()}`; }
+  function footer(){return `<section class="contact"><p class="eyebrow"><span>OPEN CHANNEL</span> / CASABLANCA</p><h2>Build something<br><em>useful.</em></h2><p>Quantitative research, intelligent systems or practical digital transformation—if the problem is real, I’d like to hear about it.</p><div class="contact-links"><a href="mailto:elkadirisifeddine@gmail.com">Email ↗</a><a href="https://www.linkedin.com/in/sifeddine-el-kadiri-097235390/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/addicteduser04" target="_blank" rel="noreferrer">GitHub ↗</a></div><footer><span>© ${new Date().getFullYear()} SIFEDDINE EL KADIRI</span><span>ENGINEERING ACROSS DISCIPLINES</span><a href="#main">BACK TO TOP ↑</a></footer></section>`;}
+
+  function home(){
+    return shell(`<section class="hero home-hero"><canvas id="signal-canvas" aria-hidden="true"></canvas><div class="grid-bg"></div><div class="hero-copy reveal"><p class="eyebrow"><span>SEK / 2026</span> MULTIDISCIPLINARY ENGINEERING</p><h1>Three lenses.<br>One way of<br><em>building.</em></h1><p class="intro">I’m Sifeddine EL KADIRI, an ENSIAS Data & Finance engineering student. I model markets, build intelligent systems and turn operational friction into production software.</p><a class="button primary route-link" href="/projects">Explore all projects <span>↘</span></a></div><div class="hero-readout"><span>SELECT A PROFILE</span><strong>03</strong><small>CONNECTED DISCIPLINES</small></div></section>
+    <section class="profile-intro bone"><div class="section-heading"><div class="section-index">01 / PROFILES</div><h2>Choose the signal<br>that matters.</h2><p>The same engineering foundation, reframed for each professional context.</p></div><div class="profile-grid">${Object.values(profiles).map((p,i)=>`<a class="profile-card route-link reveal" href="${p.path}"><span>0${i+1} / ${p.code}</span><h3>${p.label}</h3><p>${p.intro}</p><b>Enter profile ↗</b></a>`).join("")}</div></section>
+    <section class="about"><div class="portrait"><img src="/assets/sifeddine-speaking.jpeg?v=2" alt="Sifeddine EL KADIRI speaking at a lectern" width="640" height="640"><span>CASABLANCA, MOROCCO</span></div><div><p class="kicker">THE ENGINEER BEHIND THE WORK</p><h2>Finance gives me the questions. Data gives me evidence. Software makes the answer useful.</h2><p>At ENSIAS, I specialize in Data and Finance. My experience spans fixed-income quantitative research at Sterling Asset Management, data analysis at AKWA GROUP, and production applications used by real businesses.</p><div class="facts"><span><b>2027</b> ENSIAS graduation</span><span><b>03</b> professional profiles</span><span><b>${projects.length}</b> documented projects</span></div></div></section>
+    <section class="selected"><div class="section-heading"><div class="section-index">02 / PROOF</div><h2>Selected systems<br>& research.</h2><a class="text-link route-link" href="/projects">View complete library ↗</a></div><div class="project-grid">${[bySlug.dentalmarket,bySlug.saifinvest,bySlug["equity-crash"],bySlug["dwarven-industry"]].map(projectCard).join("")}</div></section>`);
   }
-  ctx.stroke();
-  const count = width < 600 ? 55 : 110;
-  for (let i = 0; i < count; i++) {
-    const x = (i * 83.17) % width;
-    const deterministic = Math.sin(i * 42.13) * height * .26;
-    const hover = Math.max(0, 1 - Math.abs(pointer.x - x) / 300);
-    const noise = deterministic * (1 - settle) + Math.sin(i * 7.1 + time / 550) * 30 * hover * disturbance;
-    const y = curveY(x) + noise;
-    ctx.beginPath(); ctx.arc(x, y, i % 7 === 0 ? 2.4 : 1.4, 0, Math.PI * 2);
-    ctx.fillStyle = i % 5 === 0 ? '#d88a5b99' : '#f2ebdd66'; ctx.fill();
+
+  function curveLab(){return `<section class="lab bone"><div><div class="section-index">INTERACTIVE / MODEL</div><p class="kicker">TOUCH THE THESIS</p><h2>Shape a yield curve.</h2><p>Nelson–Siegel compresses a term structure into three interpretable forces. Move them and watch the curve respond.</p><div class="controls"><label>Level <output id="level-out">4.1%</output><input id="level" type="range" min="2" max="7" value="4.1" step="0.1"></label><label>Slope <output id="slope-out">−1.2</output><input id="slope" type="range" min="-4" max="4" value="-1.2" step="0.1"></label><label>Curvature <output id="curve-out">2.4</output><input id="curve" type="range" min="-4" max="4" value="2.4" step="0.1"></label></div></div><div class="chart-wrap"><svg id="ns-chart" viewBox="0 0 700 380" role="img" aria-label="Interactive Nelson-Siegel yield curve"><g class="chart-grid"></g><path class="area"></path><path class="line"></path><g class="points"></g></svg><div class="chart-value"><span>10Y MODEL</span><strong id="ten-year">4.32</strong><small>YIELD %</small></div></div></section>`;}
+
+  function profilePage(key){
+    const p=profiles[key], list=p.featured.map(s=>bySlug[s]);
+    return shell(`<section class="hero profile-hero"><canvas id="signal-canvas" aria-hidden="true"></canvas><div class="grid-bg"></div><div class="hero-copy"><p class="eyebrow"><span>${p.code}</span> / ${p.label.toUpperCase()}</p><h1>${p.title.replace("—","<br><em>—</em>")}</h1><p class="intro">${p.intro}</p><div class="hero-actions"><a class="button primary" href="#featured">${p.cta} <span>↘</span></a>${p.cv ? `<a href="${p.cv}" download class="text-link">Download CV ↓</a>`:`<span class="cv-note" title="Add a PDF path in projects.js to enable this action">Profile CV · available on request</span>`}</div></div><div class="hero-readout"><span>PROFILE</span><strong>0${["quant","data","digital"].indexOf(key)+1}</strong><small>${p.thesis}</small></div></section>
+    <section class="experience bone"><div class="section-heading"><div class="section-index">01 / POSITIONING</div><h2>${p.thesis}</h2><p>Experience reframed around the problems most relevant to this profile.</p></div><div class="timeline">${p.experience.map((x,i)=>`<article><span>0${i+1}</span><i></i><p>${x}</p></article>`).join("")}</div></section>
+    ${key==="quant"?curveLab():key==="data"?dataVisual():workflowVisual()}
+    <section class="selected" id="featured"><div class="section-heading"><div class="section-index">02 / FEATURED WORK</div><h2>Evidence,<br>ordered by relevance.</h2><a class="text-link route-link" href="/projects">All projects ↗</a></div><div class="project-grid">${list.map(projectCard).join("")}</div></section>
+    <section class="skills bone"><div class="section-index">03 / CAPABILITIES</div>${p.skills.map((s,i)=>`<div class="skill-row"><span>0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}</section>`);
   }
-  if (!reduced) requestAnimationFrame(draw);
-}
-addEventListener('resize', resize);
-addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; });
-resize(); requestAnimationFrame(draw);
+  function dataVisual(){return `<section class="visual-section data-visual"><div><div class="section-index">INTERACTIVE / PIPELINE</div><p class="kicker">FROM INPUT TO EVIDENCE</p><h2>A model is only as credible as the path around it.</h2><p>Hover or focus each stage. Validation and interpretation are part of the system—not an appendix.</p></div><div class="pipeline">${["Raw data","Quality checks","Features","Model","Out-of-sample","Decision"].map((x,i)=>`<button><span>0${i+1}</span>${x}<small>${["Source & provenance","Missingness & leakage","Lagged, explainable","Baseline before complexity","Chronological evaluation","Limits stay visible"][i]}</small></button>`).join("<i>→</i>")}</div></section>`;}
+  function workflowVisual(){return `<section class="visual-section workflow"><div><div class="section-index">SYSTEM / FLOW</div><p class="kicker">DIGITAL TRANSFORMATION</p><h2>Structure the handoffs, not just the screens.</h2><p>Good business software connects the customer action to an operational record and a decision-ready view.</p></div><div class="flow-map"><span>Customer<small>discovers · requests</small></span><i>→</i><span>Workflow<small>validates · routes</small></span><i>→</i><span>Operations<small>fulfils · records</small></span><i>→</i><span>Decision<small>measures · improves</small></span></div></section>`;}
 
-const fit = document.querySelector('#fit-value');
-if (!reduced) {
-  const fitStart = performance.now();
-  function updateFit(now) {
-    const p = Math.min(1, (now - fitStart) / 2000);
-    fit.textContent = (0.312 + p * .672).toFixed(3);
-    if (p < 1) requestAnimationFrame(updateFit);
+  function projectsPage(){return shell(`<section class="page-hero"><p class="eyebrow"><span>LIBRARY / ${projects.length}</span> VERIFIED PROJECTS</p><h1>Complete project<br><em>index.</em></h1><p>Production applications, quantitative research and data systems—each documented from its repository, with limitations left intact.</p></section><section class="library bone"><div class="library-tools"><label class="search"><span class="sr-only">Search projects</span><input id="project-search" type="search" placeholder="Search project, technology or problem…"><b>⌕</b></label><div class="filters" role="group" aria-label="Filter projects">${Object.entries(labels).map(([k,v],i)=>`<button data-filter="${k}" class="${i===0?"active":""}" aria-pressed="${i===0}">${v}</button>`).join("")}</div><p id="results-count" aria-live="polite">${projects.length} projects</p></div><div id="library-grid" class="project-grid light-grid">${projects.map(projectCard).join("")}</div><div id="empty-state" hidden>No projects match that search.</div></section>`);}
+
+  function caseStudy(p){
+    const related=(p.related||[]).map(s=>bySlug[s]).filter(Boolean);
+    return shell(`<article class="case"><header class="case-hero"><div><p class="eyebrow"><span>CASE STUDY</span> / ${p.date}</p><p class="case-status">● ${p.status}</p><h1>${p.title}</h1><p class="intro">${p.tagline}</p>${chips(p.stack)}<div class="hero-actions"><a class="button primary" href="${p.github}" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>${p.demo?`<a class="text-link" href="${p.demo}" target="_blank" rel="noreferrer">Live application ↗</a>`:""}</div></div>${p.image?`<figure><img src="${p.image}" alt="${escapeHtml(p.imageAlt||"")}" width="1200" height="720"><figcaption>GENUINE REPOSITORY ASSET / ${p.repo}</figcaption></figure>`:`<div class="case-monogram" aria-hidden="true">${p.title.split(" ").map(w=>w[0]).slice(0,3).join("")}</div>`}</header>
+    <nav class="case-nav" aria-label="Case study sections"><a href="#overview">Overview</a><a href="#solution">Solution</a><a href="#architecture">Architecture</a><a href="#impact">Impact</a></nav>
+    <section id="overview" class="case-section split"><div><p class="section-index">01 / OVERVIEW</p><h2>${p.summary}</h2></div><div><h3>The problem</h3><p>${p.problem}</p></div></section>
+    <section id="solution" class="case-section bone"><div class="section-heading"><div class="section-index">02 / SOLUTION</div><h2>What I designed<br>& built.</h2><p>${p.solution}</p></div><div class="feature-grid">${p.features.map((f,i)=>`<div><span>0${i+1}</span><p>${f}</p></div>`).join("")}</div></section>
+    <section id="architecture" class="case-section"><div class="section-heading"><div class="section-index">03 / ARCHITECTURE</div><h2>How the system<br>fits together.</h2><p>Verified from repository structure and documentation.</p></div><div class="architecture">${p.architecture.map((a,i)=>`<div><b>${String(i+1).padStart(2,"0")}</b><span>${a}</span></div>`).join("<i>→</i>")}</div><aside><span>ENGINEERING CHALLENGE</span><p>${p.challenge}</p></aside></section>
+    <section id="impact" class="case-section impact bone"><p class="section-index">04 / RESULTS & IMPACT</p><blockquote>${p.impact}</blockquote><p class="accuracy">Only repository-verified results and user-confirmed production context are included. Missing business metrics are intentionally omitted.</p></section>
+    <section class="related"><div class="section-heading"><div class="section-index">05 / NEXT</div><h2>Related work.</h2></div><div class="project-grid">${related.map(projectCard).join("")}</div></section></article>`);
   }
-  requestAnimationFrame(updateFit);
-}
 
-const chart = document.querySelector('#ns-chart');
-const line = chart.querySelector('.line'), area = chart.querySelector('.area'), points = chart.querySelector('.points'), grid = chart.querySelector('.chart-grid');
-for (let x = 60; x <= 660; x += 120) grid.insertAdjacentHTML('beforeend', `<line x1="${x}" y1="25" x2="${x}" y2="340"/>`);
-for (let y = 40; y <= 340; y += 75) grid.insertAdjacentHTML('beforeend', `<line x1="40" y1="${y}" x2="680" y2="${y}"/>`);
-const inputs = ['level','slope','curve'].map(id => document.querySelector(`#${id}`));
-function ns(t, b0, b1, b2) { const tau=3.2, a=(1-Math.exp(-t/tau))/(t/tau); return b0+b1*a+b2*(a-Math.exp(-t/tau)); }
-function renderChart() {
-  const [b0,b1,b2] = inputs.map(i => +i.value); let d='', vals=[];
-  for(let i=0;i<=60;i++){const t=.25+i*.5,yieldV=ns(t,b0,b1,b2),x=45+i*10.4,y=330-(yieldV-1)*45;vals.push([x,y,yieldV]);d+=`${i?'L':'M'}${x.toFixed(1)},${y.toFixed(1)} `}
-  line.setAttribute('d',d); area.setAttribute('d',`${d} L669,340 L45,340 Z`);
-  points.innerHTML=[0,10,20,40,59].map(i=>`<circle cx="${vals[i][0]}" cy="${vals[i][1]}" r="5"/>`).join('');
-  document.querySelector('#ten-year').textContent=ns(10,b0,b1,b2).toFixed(2);
-  document.querySelector('#level-out').textContent=b0.toFixed(1)+'%'; document.querySelector('#slope-out').textContent=(b1<0?'−':'')+Math.abs(b1).toFixed(1); document.querySelector('#curve-out').textContent=(b2<0?'−':'')+Math.abs(b2).toFixed(1);
-}
-inputs.forEach(i=>i.addEventListener('input',renderChart)); renderChart();
-
-const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}), {threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-document.querySelector('#year').textContent=new Date().getFullYear();
+  function notFound(){return shell(`<section class="page-hero not-found"><p class="eyebrow"><span>404</span> / ROUTE NOT FOUND</p><h1>No signal<br><em>here.</em></h1><p>The page may have moved.</p><a class="button primary route-link" href="/">Return home ↗</a></section>`);}
+  function setMeta(title,description,path){document.title=`${title} — Sifeddine EL KADIRI`;document.querySelector('meta[name="description"]').content=description;document.querySelector('meta[property="og:title"]').content=document.title;document.querySelector('meta[property="og:description"]').content=description;const url=`https://personal-website-xi-hazel-44.vercel.app${path}`;document.querySelector('meta[property="og:url"]').content=url;document.querySelector('link[rel="canonical"]').href=url;}
+  function render({focus=false}={}){const path=cleanPath(), key=profileKey(path);let html,title,desc;if(path==="/"){html=home();title="Multidisciplinary Engineer";desc="Quantitative finance, data science and production software by Sifeddine EL KADIRI.";}else if(key){html=profilePage(key);title=profiles[key].label;desc=profiles[key].intro;}else if(path==="/projects"){html=projectsPage();title="Projects";desc=`Explore ${projects.length} engineering projects across finance, AI and digital transformation.`;}else if(path.startsWith("/projects/")){const p=bySlug[path.split("/")[2]];if(p){html=caseStudy(p);title=p.title;desc=p.summary;}else{html=notFound();title="Page not found";desc="The requested page was not found.";}}else{html=notFound();title="Page not found";desc="The requested page was not found.";}main.innerHTML=html;setMeta(title,desc,path);document.body.dataset.profile=key||"general";document.querySelectorAll("[data-route]").forEach(a=>a.classList.toggle("active",a.dataset.route===path));bindRouteLinks();bindReveals();bindCanvas();bindCurve();bindLibrary();closeMenu();window.scrollTo({top:0,behavior:"instant"});if(focus)main.focus();}
+  function bindRouteLinks(){document.querySelectorAll(".route-link").forEach(a=>a.addEventListener("click",e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const u=new URL(a.href,location.origin);if(u.origin!==location.origin)return;e.preventDefault();history.pushState({},"",u.pathname);render({focus:true});}));}
+  function bindReveals(){const els=document.querySelectorAll(".reveal,.skill-row,.timeline article,.feature-grid>div");if(matchMedia("(prefers-reduced-motion: reduce)").matches){els.forEach(e=>e.classList.add("visible"));return;}const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target);}}),{threshold:.1});els.forEach(e=>io.observe(e));}
+  function bindLibrary(){const input=document.querySelector("#project-search");if(!input)return;let filter="all";const update=()=>{const q=input.value.toLowerCase().trim();let count=0;document.querySelectorAll("#library-grid .project-card").forEach((card,i)=>{const p=projects[i],show=(filter==="all"||p.categories.includes(filter))&&(!q||[p.title,p.summary,...p.stack].join(" ").toLowerCase().includes(q));card.hidden=!show;if(show)count++;});document.querySelector("#results-count").textContent=`${count} project${count===1?"":"s"}`;document.querySelector("#empty-state").hidden=count!==0;};input.addEventListener("input",update);document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>{x.classList.toggle("active",x===b);x.setAttribute("aria-pressed",x===b)});update();}));}
+  function bindCurve(){const svg=document.querySelector("#ns-chart");if(!svg)return;const ns=(t,b0,b1,b2)=>{const x=t/2.5,a=(1-Math.exp(-x))/x;return b0+b1*a+b2*(a-Math.exp(-x));};const update=()=>{const b0=+document.querySelector("#level").value,b1=+document.querySelector("#slope").value,b2=+document.querySelector("#curve").value;const pts=Array.from({length:70},(_,i)=>{const t=.25+i*(29.75/69),y=ns(t,b0,b1,b2);return [35+i*(630/69),330-(y-1)*48,y]});const d=pts.map((p,i)=>`${i?"L":"M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");svg.querySelector(".line").setAttribute("d",d);svg.querySelector(".area").setAttribute("d",`${d} L665,340 L35,340 Z`);svg.querySelector(".points").innerHTML=[0,11,23,46,69].map(i=>`<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="6"/>`).join("");document.querySelector("#ten-year").textContent=ns(10,b0,b1,b2).toFixed(2);document.querySelector("#level-out").textContent=`${b0.toFixed(1)}%`;document.querySelector("#slope-out").textContent=b1.toFixed(1);document.querySelector("#curve-out").textContent=b2.toFixed(1);};svg.querySelector(".chart-grid").innerHTML=Array.from({length:8},(_,i)=>`<line x1="35" y1="${40+i*43}" x2="665" y2="${40+i*43}"/>`).join("")+Array.from({length:8},(_,i)=>`<line x1="${35+i*90}" y1="35" x2="${35+i*90}" y2="340"/>`).join("");document.querySelectorAll(".controls input").forEach(x=>x.addEventListener("input",update));update();}
+  function bindCanvas(){const c=document.querySelector("#signal-canvas");if(!c||matchMedia("(prefers-reduced-motion: reduce)").matches)return;const ctx=c.getContext("2d");let mx=.72,my=.48,raf;const resize=()=>{const d=Math.min(devicePixelRatio,2);c.width=c.clientWidth*d;c.height=c.clientHeight*d;ctx.setTransform(d,0,0,d,0,0);};const draw=t=>{const w=c.clientWidth,h=c.clientHeight;ctx.clearRect(0,0,w,h);ctx.beginPath();for(let x=0;x<w;x+=5){const n=Math.sin(x*.011+t*.00035)*10*(1-mx),y=h*(.32+.34*x/w)+Math.sin(x*.008+my*6)*55+n;x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.strokeStyle="#a8e063";ctx.globalAlpha=.72;ctx.lineWidth=2;ctx.stroke();ctx.globalAlpha=1;raf=requestAnimationFrame(draw);};resize();addEventListener("resize",resize,{passive:true});c.parentElement.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();mx=e.clientX/r.width;my=e.clientY/r.height;});raf=requestAnimationFrame(draw);}
+  const menu=document.querySelector(".menu-toggle");function closeMenu(){menu.setAttribute("aria-expanded","false");document.querySelector("#site-nav").classList.remove("open");}menu.addEventListener("click",()=>{const open=menu.getAttribute("aria-expanded")==="true";menu.setAttribute("aria-expanded",String(!open));document.querySelector("#site-nav").classList.toggle("open",!open);});addEventListener("popstate",()=>render());render();
+})();

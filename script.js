@@ -8,14 +8,16 @@
   const cleanPath = () => (location.pathname.replace(/\/$/, "") || "/");
   const escapeHtml = value => String(value).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
   const chips = values => `<div class="chips">${values.map(v=>`<span>${escapeHtml(v)}</span>`).join("")}</div>`;
-  const projectCard = (p, i=0) => `<article class="project-card reveal" style="--i:${i}">
+  const projectMark = p => p.title.split(/[\s&/–—-]+/).filter(Boolean).map(word=>word[0]).join("").slice(0,3).toUpperCase();
+  const projectCard = (p, i=0) => `<article class="project-card reveal" data-project="${p.slug}" style="--i:${i};--cover-tone:${(i*47+112)%360}">
     <a class="card-hit route-link" href="/projects/${p.slug}" aria-label="Read ${escapeHtml(p.title)} case study"></a>
     <div class="card-top"><span>${String(i+1).padStart(2,"0")} / ${escapeHtml(labels[p.categories[0]] || "Project")}</span><span>${p.date}</span></div>
-    ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.imageAlt||"")}" loading="lazy" width="900" height="540">` : `<div class="card-signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>`}
+    ${p.image ? `<div class="project-cover image-cover"><img src="${p.image}" alt="${escapeHtml(p.imageAlt||"")}" loading="lazy" width="900" height="540"></div>` : `<div class="project-cover generated-cover" aria-hidden="true"><span>${escapeHtml(labels[p.categories[0]]||"Engineering")}</span><strong>${projectMark(p)}</strong><small>${escapeHtml(p.title)}</small><i></i></div>`}
     <div class="card-copy"><p class="kicker">${escapeHtml(p.status)}</p><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.summary)}</p>${chips(p.stack.slice(0,4))}</div>
     <span class="card-arrow" aria-hidden="true">↗</span></article>`;
 
-  function shell(content){ return `${content}${footer()}`; }
+  function shell(content){ return `${content}${internshipSection()}${footer()}`; }
+  function internshipSection(){return `<section class="internship"><div><p class="eyebrow"><span>AVAILABLE / JAN 2027</span> INTERNSHIP SEARCH</p><h2>Looking for the next<br><em>serious problem.</em></h2></div><div><p>I’m seeking an internship starting <strong>January 2027</strong> where I can contribute through one of three complementary roles:</p><ul><li><span>01</span> Quantitative Finance</li><li><span>02</span> Data Science &amp; AI</li><li><span>03</span> IT Project Management &amp; Digital Transformation</li></ul><a class="button primary" href="mailto:elkadirisifeddine@gmail.com?subject=January%202027%20Internship%20Opportunity">Discuss an opportunity <span>↗</span></a></div></section>`;}
   function footer(){return `<section class="contact"><p class="eyebrow"><span>OPEN CHANNEL</span> / CASABLANCA</p><h2>Build something<br><em>useful.</em></h2><p>Quantitative research, intelligent systems or practical digital transformation—if the problem is real, I’d like to hear about it.</p><div class="contact-links"><a href="mailto:elkadirisifeddine@gmail.com">Email ↗</a><a href="https://www.linkedin.com/in/sifeddine-el-kadiri-097235390/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/addicteduser04" target="_blank" rel="noreferrer">GitHub ↗</a></div><footer><span>© ${new Date().getFullYear()} SIFEDDINE EL KADIRI</span><span>ENGINEERING ACROSS DISCIPLINES</span><a href="#main">BACK TO TOP ↑</a></footer></section>`;}
 
   function home(){

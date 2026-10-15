@@ -23,6 +23,12 @@ Open `http://localhost:4173`. The production Vercel configuration rewrites share
 
 Add one project object to `PORTFOLIO_DATA.projects`, including a unique `slug`, verified repository facts, and related project slugs. It will automatically appear in the library, search, filters, and reusable case-study renderer. Add its URL to `sitemap.xml` for indexing.
 
+## Tailored landing views
+
+Visitors arriving at `/` choose a discipline (and optionally Recruiter or Visitor) and land on a view built for it. The entries come from `PORTFOLIO_DATA.lenses` in `projects.js`, and the selector, view switcher and renderer all read from that list. To add a specialization such as consulting, add one complete entry there once its content is ready. Nothing else needs to change. Skip, Close, Escape and “View all work” return to the original homepage. The choice is kept only in memory: it is never stored or put in the URL, and a reload shows the selector again.
+
+Content checks: `node --test tests/`
+
 ## Profile CV configuration
 
 No resume PDFs were present during implementation, so profile pages intentionally show “Profile CV · available on request” instead of broken links. To enable downloads:

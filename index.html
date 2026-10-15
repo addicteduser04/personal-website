@@ -44,13 +44,13 @@
         <button class="entry-close" type="button" aria-label="Close and explore everything">Close <span aria-hidden="true">×</span></button>
       </header>
       <div class="entry-lead">
-        <p class="entry-step">A portfolio in four directions</p>
+        <p class="entry-step">A portfolio in three directions</p>
         <h1 id="entry-title">Explore my work,<br><em>your way.</em></h1>
         <p id="entry-intro">One quick choice shapes what you discover first.</p>
       </div>
       <div class="entry-body">
-        <fieldset class="entry-audience">
-          <legend>Who are you exploring for?</legend>
+        <fieldset class="entry-audience" data-arrows>
+          <legend>Who are you exploring for? <span>Optional</span></legend>
           <button class="audience-card" type="button" data-audience="recruiter" aria-pressed="false">
             <span>01</span><strong>Recruiter / Hiring Manager</strong><small>Experience, relevant work, and direct ways to connect.</small>
           </button>
@@ -58,23 +58,20 @@
             <span>02</span><strong>Visitor / Fellow Professional</strong><small>Projects, research, and ideas to explore.</small>
           </button>
         </fieldset>
-        <fieldset class="entry-focus">
-          <legend>Choose a signal <span>Optional</span></legend>
-          <button type="button" data-focus="strategy" aria-pressed="false"><span>01</span><strong>Strategy &amp; Data Consulting</strong><small>Decisions · operations · analytics</small></button>
-          <button type="button" data-focus="quant" aria-pressed="false"><span>02</span><strong>Quantitative Finance</strong><small>Markets · modelling · risk</small></button>
-          <button type="button" data-focus="data" aria-pressed="false"><span>03</span><strong>Data Science &amp; AI</strong><small>ML · NLP · applied intelligence</small></button>
-          <button type="button" data-focus="software" aria-pressed="false"><span>04</span><strong>Software Engineering</strong><small>Architecture · APIs · platforms</small></button>
+        <fieldset class="entry-focus" data-arrows>
+          <legend>Choose a discipline</legend>
         </fieldset>
       </div>
       <footer class="entry-footer">
         <p id="entry-privacy">Your choice only personalizes this page. No personal information is requested, and your selection isn’t stored or sent to a server.</p>
         <div class="entry-actions">
           <button class="entry-skip" type="button">Skip — explore everything</button>
-          <button class="entry-enter" type="button" disabled>Open tailored view <span aria-hidden="true">↘</span></button>
+          <button class="entry-enter" type="button" disabled>Choose a discipline <span aria-hidden="true">↘</span></button>
         </div>
       </footer>
     </section>
   </div>
+  <p id="view-status" class="sr-only" aria-live="polite"></p>
   <div class="route-progress" aria-hidden="true"></div>
 </body>
 </html>

@@ -1,12 +1,12 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/quant", "destination": "/#expertise", "permanent": true },
-    { "source": "/data-ai", "destination": "/#expertise", "permanent": true },
-    { "source": "/digital-transformation", "destination": "/#expertise", "permanent": true },
     { "source": "/projects", "destination": "/#work", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/quant", "destination": "/quant/index.html" },
+    { "source": "/data-ai", "destination": "/data-ai/index.html" },
+    { "source": "/digital-transformation", "destination": "/digital-transformation/index.html" },
     { "source": "/projects/:slug", "destination": "/" }
   ],
   "headers": [

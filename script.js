@@ -225,7 +225,7 @@
         </aside>
         <div class="case-sections">
           <section class="case-section"><span>01 / PROBLEM</span><h3>Why this work exists</h3><p>${escapeHtml(project.problem)}</p></section>
-          <section class="case-section"><span>02 / ENGINEERING APPROACH</span><h3>How the system responds</h3><p>${escapeHtml(project.solution)}</p>${listMarkup(project.features)}</section>
+          <section class="case-section"><span>02 / MY CONTRIBUTION</span><h3>Engineering approach</h3><p>${escapeHtml(project.solution)}</p>${listMarkup(project.features)}</section>
           <section class="case-section"><span>03 / ARCHITECTURE</span><h3>What makes it work</h3>${listMarkup(project.architecture)}</section>
           <section class="case-section"><span>04 / CRITICAL CONSTRAINT</span><h3>The hard part</h3><p>${escapeHtml(project.challenge)}</p></section>
           <section class="case-section"><span>05 / OUTCOME</span><h3>What the evidence supports</h3><p>${escapeHtml(project.impact)}</p></section>

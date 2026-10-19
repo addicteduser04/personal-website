@@ -7,7 +7,8 @@
     { "source": "/quant", "destination": "/quant/index.html" },
     { "source": "/data-ai", "destination": "/data-ai/index.html" },
     { "source": "/digital-transformation", "destination": "/digital-transformation/index.html" },
-    { "source": "/projects/:slug", "destination": "/" }
+    { "source": "/projects/:slug", "destination": "/projects/:slug/index.html" },
+    { "source": "/experience/:slug", "destination": "/experience/:slug/index.html" }
   ],
   "headers": [
     {

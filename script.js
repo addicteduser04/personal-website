@@ -3,7 +3,6 @@
 
   const data = window.PORTFOLIO_DATA || {};
   const projects = Array.isArray(data.projects) ? data.projects : [];
-  const bySlug = new Map(projects.map((project) => [project.slug, project]));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   const escapeHtml = (value = "") => String(value).replace(/[&<>'"]/g, (character) => ({
@@ -13,14 +12,6 @@
     "'": "&#39;",
     '"': "&quot;"
   })[character]);
-  const safeUrl = (value) => {
-    try {
-      const url = new URL(value, window.location.origin);
-      return ["https:", "http:", "mailto:"].includes(url.protocol) ? escapeHtml(url.href) : "#";
-    } catch {
-      return "#";
-    }
-  };
 
   const header = document.querySelector("[data-header]");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -165,13 +156,13 @@
 
   function projectRow(project, index) {
     const label = categoryLabels[project.categories?.[0]] || "Engineering";
-    return `<button class="archive-row" type="button" data-project="${escapeHtml(project.slug)}">
+    return `<a class="archive-row" href="/projects/${escapeHtml(project.slug)}">
       <span>${String(index + 1).padStart(2, "0")}</span>
       <strong>${escapeHtml(project.title)}</strong>
       <p>${escapeHtml(project.tagline)}</p>
       <small>${escapeHtml(label)} · ${escapeHtml(project.date)}</small>
       <i aria-hidden="true">↗</i>
-    </button>`;
+    </a>`;
   }
 
   function renderArchive(filter = "all") {
@@ -189,87 +180,7 @@
   });
   renderArchive();
 
-  const dialog = document.querySelector("#project-dialog");
-  const dialogContent = document.querySelector("[data-dialog-content]");
-  const dialogClose = document.querySelector("[data-dialog-close]");
-  let activeProject = null;
-
-  function listMarkup(items = []) {
-    return items.length ? `<ul class="case-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "";
-  }
-
-  function caseStudyMarkup(project) {
-    const categories = (project.categories || []).map((category) => categoryLabels[category] || category).join(" · ");
-    const externalLinks = [
-      project.github ? `<a href="${safeUrl(project.github)}" target="_blank" rel="noreferrer">View source on GitHub <span aria-hidden="true">↗</span></a>` : "",
-      project.demo ? `<a href="${safeUrl(project.demo)}" target="_blank" rel="noreferrer">Open live application <span aria-hidden="true">↗</span></a>` : ""
-    ].join("");
-    return `<article class="case-study">
-      <header class="case-hero">
-        <div class="case-hero-copy">
-          <p class="case-eyebrow">${escapeHtml(project.date)} / ${escapeHtml(categories)}</p>
-          <h2 id="dialog-title">${escapeHtml(project.title)}</h2>
-          <p>${escapeHtml(project.tagline)}</p>
-          <div class="case-stack">${(project.stack || []).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>
-        </div>
-        <div class="case-links">${externalLinks}</div>
-      </header>
-      <div class="case-body">
-        <aside class="case-aside">
-          <div class="case-status"><span>Project status</span><strong>${escapeHtml(project.status)}</strong></div>
-          <dl>
-            <div><dt>Repository</dt><dd>${escapeHtml(project.repo || "Documented project")}</dd></div>
-            <div><dt>Year</dt><dd>${escapeHtml(project.date)}</dd></div>
-            <div><dt>Domains</dt><dd>${escapeHtml(categories)}</dd></div>
-          </dl>
-        </aside>
-        <div class="case-sections">
-          <section class="case-section"><span>01 / PROBLEM</span><h3>Why this work exists</h3><p>${escapeHtml(project.problem)}</p></section>
-          <section class="case-section"><span>02 / MY CONTRIBUTION</span><h3>Engineering approach</h3><p>${escapeHtml(project.solution)}</p>${listMarkup(project.features)}</section>
-          <section class="case-section"><span>03 / ARCHITECTURE</span><h3>What makes it work</h3>${listMarkup(project.architecture)}</section>
-          <section class="case-section"><span>04 / CRITICAL CONSTRAINT</span><h3>The hard part</h3><p>${escapeHtml(project.challenge)}</p></section>
-          <section class="case-section"><span>05 / OUTCOME</span><h3>What the evidence supports</h3><p>${escapeHtml(project.impact)}</p></section>
-        </div>
-      </div>
-    </article>`;
-  }
-
-  function openProject(slug) {
-    const project = bySlug.get(slug);
-    if (!project || !dialog || !dialogContent) return;
-    activeProject = project;
-    dialogContent.innerHTML = caseStudyMarkup(project);
-    dialogContent.scrollTop = 0;
-    if (!dialog.open) dialog.showModal();
-    document.body.classList.add("dialog-open");
-    if (liveRegion) liveRegion.textContent = `${project.title} case study opened`;
-  }
-
-  function closeProject() {
-    if (dialog?.open) dialog.close();
-  }
-
-  document.addEventListener("click", (event) => {
-    const trigger = event.target.closest("[data-project]");
-    if (!trigger) return;
-    event.preventDefault();
-    openProject(trigger.dataset.project);
-  });
-
-  dialogClose?.addEventListener("click", closeProject);
-  dialog?.addEventListener("click", (event) => {
-    if (event.target === dialog) closeProject();
-  });
-  dialog?.addEventListener("close", () => {
-    document.body.classList.remove("dialog-open");
-    if (activeProject && liveRegion) liveRegion.textContent = `${activeProject.title} case study closed`;
-    activeProject = null;
-  });
-
-  const deepProject = window.location.pathname.match(/^\/projects\/([^/]+)\/?$/)?.[1];
-  if (deepProject && bySlug.has(deepProject)) {
-    window.requestAnimationFrame(() => openProject(deepProject));
-  } else if (window.location.pathname === "/projects" || window.location.pathname === "/projects/") {
+  if (window.location.pathname === "/projects" || window.location.pathname === "/projects/") {
     window.requestAnimationFrame(() => document.querySelector("#work")?.scrollIntoView());
   }
 })();

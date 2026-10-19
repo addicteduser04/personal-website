@@ -51,6 +51,7 @@ test("profile content is curated, factual, and CV-safe", () => {
   for (const claim of ["98%", "85% F1", "6M+", "47%", "2004–26"]) assert.ok(!publicCopy.includes(claim), `${claim} remains unpublished`);
   assert.doesNotMatch(publicCopy, /href="[^"]+\.pdf"|download=/i);
   assert.match(publicCopy, /Request (?:quant |data |consulting )?CV/i);
+  assert.match(profileScript, /href="\/projects\/\$\{escapeHtml\(project\.slug\)\}"/);
 });
 
 test("Vercel serves profiles without homepage redirects and sitemap lists them", () => {
@@ -62,4 +63,14 @@ test("Vercel serves profiles without homepage redirects and sitemap lists them",
     assert.ok(rewrites.includes(`/${route}/index.html`), `${route} is explicitly rewritten to its document`);
     assert.match(sitemap, new RegExp(`/${route}<`));
   }
+});
+
+test("Vercel exposes every case-study and experience route as a static document", () => {
+  const rewrites = JSON.stringify(vercel.rewrites || []);
+  assert.ok(rewrites.includes("/projects/:slug/index.html"));
+  assert.ok(rewrites.includes("/experience/:slug/index.html"));
+  const sitemap = read("sitemap.xml");
+  assert.equal((sitemap.match(/\/projects\//g) || []).length, 15);
+  assert.match(sitemap, /\/experience\/sterling-asset-management</);
+  assert.match(sitemap, /\/experience\/akwa-group</);
 });

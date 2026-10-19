@@ -89,7 +89,7 @@
       ].join("");
       return `<article class="profile-project reveal">
         <div class="profile-project-index"><span>${String(index + 1).padStart(2, "0")}</span><small>${escapeHtml(project.date)}</small></div>
-        <div><p>${escapeHtml(project.status)}</p><h3>${escapeHtml(project.title)}</h3><strong>${escapeHtml(project.tagline)}</strong><p>${escapeHtml(project.summary)}</p><ul>${project.stack.slice(0, 5).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul><div class="profile-project-links">${links}</div></div>
+        <div><p>${escapeHtml(project.status)}</p><h3><a href="/projects/${escapeHtml(project.slug)}">${escapeHtml(project.title)}</a></h3><strong>${escapeHtml(project.tagline)}</strong><p>${escapeHtml(project.summary)}</p><ul>${project.stack.slice(0, 5).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul><div class="profile-project-links"><a href="/projects/${escapeHtml(project.slug)}">Read case study <span aria-hidden="true">→</span></a>${links}</div></div>
       </article>`;
     }).join("");
   }

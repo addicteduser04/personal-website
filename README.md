@@ -1,41 +1,38 @@
-# Sifeddine EL KADIRI — Portfolio
+# Sifeddine El Kadiri — Portfolio
 
-A dependency-free, data-driven portfolio spanning quantitative finance, data science and AI, and IT/digital transformation.
+A dependency-free, single-page portfolio for a Data & Finance Engineer. The experience combines a cinematic video hero with repository-audited work across quantitative finance, data engineering, and applied AI.
 
 ## Local preview
 
-Run any static server from the project root, for example:
+Run a static server from the project root:
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Open `http://localhost:4173`. The production Vercel configuration rewrites shareable profile and case-study paths to the application shell.
+Open `http://localhost:4173`.
 
-## Content architecture
+## Architecture
 
-- `projects.js` is the source of truth for profile positioning and project case studies.
-- `script.js` contains shared renderers, navigation, filters and interactive visualizations.
-- `assets/projects/` contains genuine public-repository assets used by the case studies.
-- `vercel.json` enables refreshable direct routes without intercepting static assets.
+- `index.html` contains the complete semantic page structure and indexable professional narrative.
+- `projects.js` is the source of truth for all 15 project case studies.
+- `script.js` handles progressive enhancement: navigation, reveal motion, project filtering, video controls, and the accessible case-study dialog.
+- `styles.css` contains the responsive design system and reduced-motion treatment.
+- `assets/media/` contains optimized desktop/mobile versions of the supplied hero video and poster frames extracted from that video.
+- `tests/portfolio.test.mjs` checks content integrity, media wiring, factual safeguards, and SEO configuration.
 
-## Adding a project
+## Content safeguards
 
-Add one project object to `PORTFOLIO_DATA.projects`, including a unique `slug`, verified repository facts, and related project slugs. It will automatically appear in the library, search, filters, and reusable case-study renderer. Add its URL to `sitemap.xml` for indexing.
+The internship figures previously marked as pending documentary confirmation are intentionally not presented. Project metrics remain only where the repository catalogue records them as documented results. No public CV file is included, so every CV action opens a pre-addressed email request instead of a broken download.
 
-## Tailored landing views
+## Verification
 
-Visitors arriving at `/` choose a discipline (and optionally Recruiter or Visitor) and land on a view built for it. The entries come from `PORTFOLIO_DATA.lenses` in `projects.js`, and the selector, view switcher and renderer all read from that list. To add a specialization such as consulting, add one complete entry there once its content is ready. Nothing else needs to change. Skip, Close, Escape and “View all work” return to the original homepage. The choice is kept only in memory: it is never stored or put in the URL, and a reload shows the selector again.
-
-Content checks: `node --test tests/`
-
-## Profile CV configuration
-
-No resume PDFs were present during implementation, so profile pages intentionally show “Profile CV · available on request” instead of broken links. To enable downloads:
-
-1. Add the PDFs under `assets/resumes/`.
-2. Set each profile’s `cv` property in `projects.js`, for example `cv: "/assets/resumes/sifeddine-quant-cv.pdf"`.
+```bash
+node --check script.js
+node --check projects.js
+node --test tests/
+```
 
 ## Deployment
 
-The project is prepared for Vercel as a static site. No production deployment or Git push is performed by this workspace task.
+The site remains compatible with Vercel static hosting. Legacy discipline URLs redirect to the relevant section of the unified homepage, while existing project case-study paths are rewritten to the application shell.

@@ -1,11 +1,28 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/quant", "destination": "/index.html" },
-    { "source": "/data-ai", "destination": "/index.html" },
-    { "source": "/digital-transformation", "destination": "/index.html" },
-    { "source": "/projects", "destination": "/index.html" },
-    { "source": "/projects/:slug", "destination": "/index.html" }
+  "redirects": [
+    { "source": "/quant", "destination": "/#expertise", "permanent": true },
+    { "source": "/data-ai", "destination": "/#expertise", "permanent": true },
+    { "source": "/digital-transformation", "destination": "/#expertise", "permanent": true },
+    { "source": "/projects", "destination": "/#work", "permanent": true }
   ],
-  "headers": [{ "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }]
+  "rewrites": [
+    { "source": "/projects/:slug", "destination": "/" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
+  ]
 }

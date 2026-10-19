@@ -2,76 +2,432 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#10171d">
-  <meta name="description" content="Sifeddine EL KADIRI — engineering at the intersection of quantitative finance, data science and digital transformation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060b12">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Sifeddine El Kadiri is a Data & Finance Engineer working across quantitative finance, data engineering, and applied AI.">
+  <meta name="author" content="Sifeddine El Kadiri">
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sifeddine EL KADIRI — Multidisciplinary Engineer">
-  <meta property="og:description" content="Quantitative finance, data science and production software.">
-  <meta property="og:url" content="https://personal-website-xi-hazel-44.vercel.app/">
-  <link rel="canonical" href="https://personal-website-xi-hazel-44.vercel.app/">
-  <title>Sifeddine EL KADIRI — Multidisciplinary Engineer</title>
+  <meta property="og:site_name" content="Sifeddine El Kadiri — Portfolio">
+  <meta property="og:title" content="Sifeddine El Kadiri — Data & Finance Engineer">
+  <meta property="og:description" content="Engineering data. Decoding finance. Explore quantitative research, data systems, and applied AI work.">
+  <meta property="og:url" content="https://www.sifeddineelkadiri.online/">
+  <meta property="og:image" content="https://www.sifeddineelkadiri.online/assets/media/hero-poster.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.sifeddineelkadiri.online/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('has-js')</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/media/hero-poster.webp" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="/styles.css">
+  <title>Sifeddine El Kadiri — Data & Finance Engineer</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sifeddine El Kadiri",
+    "url": "https://www.sifeddineelkadiri.online/",
+    "jobTitle": "Data & Finance Engineer",
+    "email": "mailto:elkadirisifeddine@gmail.com",
+    "sameAs": [
+      "https://github.com/addicteduser04",
+      "https://www.linkedin.com/in/sifeddine-el-kadiri-097235390/"
+    ],
+    "knowsAbout": ["Quantitative Finance", "Data Engineering", "Machine Learning", "Financial Modelling", "Risk Analytics"]
+  }
+  </script>
   <script src="/projects.js" defer></script>
   <script src="/script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <header class="nav-shell">
-    <a class="mark route-link" href="/" aria-label="Sifeddine EL KADIRI, home">SEK<span>.</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><b class="sr-only">Open navigation</b></button>
-    <nav id="site-nav" aria-label="Primary navigation">
-      <div class="profile-switcher" aria-label="Professional profiles">
-        <a class="route-link" data-route="/quant" href="/quant">Quant Finance</a>
-        <a class="route-link" data-route="/data-ai" href="/data-ai">Data &amp; AI</a>
-        <a class="route-link" data-route="/digital-transformation" href="/digital-transformation">IT &amp; Digital</a>
-      </div>
-      <a class="route-link projects-link" data-route="/projects" href="/projects">Projects</a>
-      <button class="change-view" type="button" hidden>Change view</button>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="page-progress" aria-hidden="true"><span></span></div>
+  <div class="site-atmosphere" aria-hidden="true"></div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Sifeddine El Kadiri — back to top">
+      <span class="brand-mark">SEK</span>
+      <span class="brand-role">Data &amp; Finance<br>Engineer</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="menu-label">Menu</span>
+      <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+      <a href="#expertise"><span>01</span> Expertise</a>
+      <a href="#work"><span>02</span> Work</a>
+      <a href="#experience"><span>03</span> Experience</a>
+      <a href="#about"><span>04</span> About</a>
     </nav>
-    <a class="nav-contact" href="mailto:elkadirisifeddine@gmail.com">Let’s talk ↗</a>
+    <a class="header-contact" href="mailto:elkadirisifeddine@gmail.com?subject=Portfolio%20inquiry">Let’s connect <span aria-hidden="true">↗</span></a>
   </header>
-  <main id="main" tabindex="-1"></main>
-  <div class="entry-layer" hidden>
-    <button class="entry-backdrop" type="button" tabindex="-1" aria-label="Close personalization"></button>
-    <section class="entry-dialog" role="dialog" aria-modal="true" aria-labelledby="entry-title" aria-describedby="entry-intro entry-privacy" tabindex="-1">
-      <header class="entry-header">
-        <p class="entry-index"><span>SEK / ENTRY</span> PERSONALIZED PORTFOLIO</p>
-        <button class="entry-close" type="button" aria-label="Close and explore everything">Close <span aria-hidden="true">×</span></button>
-      </header>
-      <div class="entry-lead">
-        <p class="entry-step">A portfolio in three directions</p>
-        <h1 id="entry-title">Explore my work,<br><em>your way.</em></h1>
-        <p id="entry-intro">One quick choice shapes what you discover first.</p>
-      </div>
-      <div class="entry-body">
-        <fieldset class="entry-audience" data-arrows>
-          <legend>Who are you exploring for? <span>Optional</span></legend>
-          <button class="audience-card" type="button" data-audience="recruiter" aria-pressed="false">
-            <span>01</span><strong>Recruiter / Hiring Manager</strong><small>Experience, relevant work, and direct ways to connect.</small>
-          </button>
-          <button class="audience-card" type="button" data-audience="visitor" aria-pressed="false">
-            <span>02</span><strong>Visitor / Fellow Professional</strong><small>Projects, research, and ideas to explore.</small>
-          </button>
-        </fieldset>
-        <fieldset class="entry-focus" data-arrows>
-          <legend>Choose a discipline</legend>
-        </fieldset>
-      </div>
-      <footer class="entry-footer">
-        <p id="entry-privacy">Your choice only personalizes this page. No personal information is requested, and your selection isn’t stored or sent to a server.</p>
-        <div class="entry-actions">
-          <button class="entry-skip" type="button">Skip — explore everything</button>
-          <button class="entry-enter" type="button" disabled>Choose a discipline <span aria-hidden="true">↘</span></button>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-a" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-b" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <p class="signal-label hero-reveal" style="--delay: .05s"><i></i> Data &amp; Finance Engineer <span>Morocco / 2026</span></p>
+        <h1 id="hero-title" class="hero-name" aria-label="Sifeddine El Kadiri">
+          <span class="hero-reveal" style="--delay: .12s">Sifeddine</span>
+          <span class="hero-reveal name-outline" style="--delay: .19s">El Kadiri</span>
+        </h1>
+        <p class="hero-thesis hero-reveal" style="--delay: .28s">Engineering data.<br><em>Decoding finance.</em></p>
+        <p class="hero-intro hero-reveal" style="--delay: .35s">I turn complex information into intelligent systems, quantitative insight, and decisions people can trust.</p>
+        <div class="hero-actions hero-reveal" style="--delay: .42s">
+          <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
+          <a class="button button-ghost" href="mailto:elkadirisifeddine@gmail.com?subject=CV%20request%20—%20Sifeddine%20El%20Kadiri">Request CV <span aria-hidden="true">↗</span></a>
         </div>
+        <div class="hero-links hero-reveal" style="--delay: .49s" aria-label="Professional links">
+          <a href="https://www.linkedin.com/in/sifeddine-el-kadiri-097235390/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/addicteduser04" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="mailto:elkadirisifeddine@gmail.com">Email ↗</a>
+        </div>
+      </div>
+
+      <figure class="hero-media hero-reveal" style="--delay: .2s">
+        <div class="media-corners" aria-hidden="true"></div>
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/assets/media/hero-poster.webp" aria-hidden="true" tabindex="-1">
+          <source src="/assets/media/hero-office-540.mp4" type="video/mp4" media="(max-width: 640px)">
+          <source src="/assets/media/hero-office-720.mp4" type="video/mp4">
+        </video>
+        <div class="video-wash" aria-hidden="true"></div>
+        <div class="media-head" aria-hidden="true">
+          <span>VISUAL_FEED / 01</span>
+          <span class="media-live"><i></i> LOOP / MUTED</span>
+        </div>
+        <div class="media-chart" aria-hidden="true">
+          <div class="chart-meta"><span>ILLUSTRATIVE SIGNAL</span><b>DATA → MODEL → DECISION</b></div>
+          <svg viewBox="0 0 560 130" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#10b981" stop-opacity=".32"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></linearGradient>
+            </defs>
+            <path class="chart-area" d="M0 112 C36 103 42 89 78 94 S128 114 162 75 S216 87 244 59 S298 73 332 46 S384 65 420 35 S472 48 506 23 S542 29 560 10 L560 130 L0 130Z"/>
+            <path class="chart-line" d="M0 112 C36 103 42 89 78 94 S128 114 162 75 S216 87 244 59 S298 73 332 46 S384 65 420 35 S472 48 506 23 S542 29 560 10"/>
+            <circle cx="560" cy="10" r="4"/>
+          </svg>
+          <span class="chart-note">Abstract visualization — not live market data</span>
+        </div>
+        <button class="video-control" type="button" aria-label="Pause background video" data-video-control><span aria-hidden="true">Ⅱ</span></button>
+      </figure>
+
+      <div class="hero-rail hero-reveal" style="--delay: .58s">
+        <div><span>Primary focus</span><strong>Quantitative Finance</strong></div>
+        <div><span>Engineering layer</span><strong>Data Systems</strong></div>
+        <div><span>Intelligence layer</span><strong>Applied AI</strong></div>
+        <div><span>Portfolio evidence</span><strong>15 documented projects</strong></div>
+      </div>
+      <a class="scroll-cue" href="#expertise"><span>Scroll to examine</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <section class="section expertise" id="expertise" aria-labelledby="expertise-title">
+      <div class="section-heading reveal">
+        <p class="section-code">01 / WHAT I ENGINEER</p>
+        <div>
+          <h2 id="expertise-title">Three disciplines.<br><em>One analytical system.</em></h2>
+          <p>Finance frames the question. Data supplies the evidence. Software turns the answer into something repeatable.</p>
+        </div>
+      </div>
+
+      <div class="expertise-grid">
+        <article class="expertise-card reveal" data-tilt>
+          <header><span>I</span><p>Quantitative Finance</p></header>
+          <div class="expertise-visual quant-visual" aria-hidden="true">
+            <div class="axis-labels"><span>YIELD</span><span>30Y</span></div>
+            <svg viewBox="0 0 500 220" preserveAspectRatio="none">
+              <g class="visual-grid"><path d="M0 44H500M0 88H500M0 132H500M0 176H500M100 0V220M200 0V220M300 0V220M400 0V220"/></g>
+              <path class="ghost-path" d="M0 180 C72 154 112 160 164 120 S256 82 320 73 S420 46 500 31"/>
+              <path class="active-path" d="M0 192 C56 176 116 132 168 126 S236 95 304 87 S410 63 500 50"/>
+              <g class="curve-points"><circle cx="0" cy="192" r="4"/><circle cx="168" cy="126" r="4"/><circle cx="304" cy="87" r="4"/><circle cx="500" cy="50" r="4"/></g>
+            </svg>
+          </div>
+          <h3>Model the market.<br>Test the assumptions.</h3>
+          <p>Fixed income, derivatives, portfolio construction, risk, and systematic research with chronology and model limits kept visible.</p>
+          <ul aria-label="Quantitative finance methods"><li>Nelson–Siegel</li><li>HMM regimes</li><li>Walk-forward validation</li><li>VaR / CVaR</li></ul>
+          <a href="#project-nelson-siegel">View fixed-income research <span>↘</span></a>
+        </article>
+
+        <article class="expertise-card reveal" data-tilt>
+          <header><span>II</span><p>Data Engineering &amp; Analytics</p></header>
+          <div class="expertise-visual pipeline-visual" aria-hidden="true">
+            <div class="pipeline-node"><i></i><span>RAW</span><b>01</b></div><em>→</em>
+            <div class="pipeline-node"><i></i><span>VALIDATE</span><b>02</b></div><em>→</em>
+            <div class="pipeline-node"><i></i><span>MODEL</span><b>03</b></div><em>→</em>
+            <div class="pipeline-node"><i></i><span>DECIDE</span><b>04</b></div>
+          </div>
+          <h3>Build the path<br>from source to signal.</h3>
+          <p>Data pipelines, quality controls, relational models, analytics, and decision systems designed for traceability.</p>
+          <ul aria-label="Data engineering technologies"><li>Python / SQL</li><li>PostgreSQL</li><li>ETL / ELT</li><li>Data quality</li></ul>
+          <a href="#project-saifinvest">Explore the data layer <span>↘</span></a>
+        </article>
+
+        <article class="expertise-card reveal" data-tilt>
+          <header><span>III</span><p>AI &amp; Intelligent Systems</p></header>
+          <div class="expertise-visual network-visual" aria-hidden="true">
+            <svg viewBox="0 0 500 220">
+              <g class="network-lines"><path d="M46 51L190 34L320 76L454 38M46 51L190 111L320 76L454 118M46 164L190 111L320 170L454 118M46 164L190 184L320 170L454 190M190 34L320 170M190 184L320 76"/></g>
+              <g class="network-nodes"><circle cx="46" cy="51" r="7"/><circle cx="46" cy="164" r="7"/><circle cx="190" cy="34" r="7"/><circle cx="190" cy="111" r="10"/><circle cx="190" cy="184" r="7"/><circle cx="320" cy="76" r="10"/><circle cx="320" cy="170" r="7"/><circle cx="454" cy="38" r="7"/><circle cx="454" cy="118" r="10"/><circle cx="454" cy="190" r="7"/></g>
+            </svg>
+          </div>
+          <h3>Apply intelligence<br>where evidence matters.</h3>
+          <p>Machine learning, anomaly detection, NLP, and retrieval systems for financial and operational information.</p>
+          <ul aria-label="AI methods"><li>Classification</li><li>Anomaly detection</li><li>NLP / embeddings</li><li>RAG</li></ul>
+          <a href="#project-equity-crash">See applied ML work <span>↘</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section work" id="work" aria-labelledby="work-title">
+      <div class="section-heading reveal">
+        <p class="section-code">02 / SELECTED WORK</p>
+        <div>
+          <h2 id="work-title">Evidence over<br><em>adjectives.</em></h2>
+          <p>Research and systems selected for relevance to finance, data, and engineering. Every limitation stays attached to the claim.</p>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card project-card-featured reveal" id="project-saifinvest">
+          <div class="project-media media-saifinvest">
+            <img src="/assets/optimized/saifinvest-cover.webp" alt="SaifInvest editorial cover reading: Investir au Maroc, avec plus de clarté" width="1179" height="1334" loading="lazy">
+            <span class="project-index">01 / FLAGSHIP SYSTEM</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Active development</span><span>Finance · Data · Full-stack</span><span>2026</span></div>
+            <h3>SaifInvest</h3>
+            <p class="project-tagline">Investment research and portfolio intelligence designed for Casablanca-market data realities.</p>
+            <div class="project-facts"><span>Exact-decimal ledger</span><span>Data-quality states</span><span>EN / FR / AR</span></div>
+            <p class="project-summary">A multilingual platform for tracking portfolios, researching securities, and making missing or stale data explicit instead of inventing certainty.</p>
+            <button class="project-open" type="button" data-project="saifinvest">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="project-card project-card-tall reveal" id="project-nelson-siegel">
+          <div class="project-media chart-media">
+            <img src="/assets/projects/yield-curves.png" alt="Prospective Moroccan sovereign yield curves" width="1360" height="850" loading="lazy">
+            <span class="project-index">02 / FIXED INCOME</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Research</span><span>Python · Statsmodels</span></div>
+            <h3>Moroccan Yield-Curve Forecasting</h3>
+            <p class="project-tagline">Forecasting the term structure without hiding model limits.</p>
+            <button class="project-open" type="button" data-project="nelson-siegel">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="project-card reveal" id="project-market-regimes">
+          <div class="project-media chart-media dark-chart">
+            <img src="/assets/optimized/regime-performance.webp" alt="Tracked regime strategy and benchmark performance" width="1800" height="892" loading="lazy">
+            <span class="project-index">03 / PORTFOLIO RESEARCH</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Research complete</span><span>HMM · CVXPY</span></div>
+            <h3>Market Regimes &amp; Dynamic Allocation</h3>
+            <p class="project-tagline">An honest look at lower drawdown—and the trade-offs behind it.</p>
+            <button class="project-open" type="button" data-project="market-regimes">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="project-card reveal" id="project-equity-crash">
+          <div class="project-media chart-media dark-chart">
+            <img src="/assets/optimized/crash-probability.webp" alt="QQQ crash probability timeline" width="1011" height="419" loading="lazy">
+            <span class="project-index">04 / APPLIED ML</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Research complete</span><span>XGBoost · Walk-forward</span></div>
+            <h3>Equity Crash Prediction</h3>
+            <p class="project-tagline">Rare-event classification evaluated in chronological order.</p>
+            <button class="project-open" type="button" data-project="equity-crash">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="project-card project-card-wide reveal" id="project-dwarven-industry">
+          <div class="project-media brand-media dwarven-media">
+            <img src="/assets/projects/dwarven-banner.png" alt="Dwarven Industry management system wordmark" width="1200" height="540" loading="lazy">
+            <span class="project-index">05 / PRODUCTION SYSTEM</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Used by a real company</span><span>Next.js · PostgreSQL</span></div>
+            <h3>Dwarven Industry</h3>
+            <p class="project-tagline">A role-aware operating system connecting customers, suppliers, inventory, orders, quotations, and invoices.</p>
+            <button class="project-open" type="button" data-project="dwarven-industry">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="project-card project-card-wide reveal" id="project-dentalmarket">
+          <div class="project-media brand-media dentanova-media">
+            <img src="/assets/projects/dentanova-official-logo.jpeg" alt="Official DENTANOVA Matériel Dentaire logo" width="1254" height="1254" loading="lazy">
+            <span class="project-index">06 / COMMERCE SYSTEM</span>
+          </div>
+          <div class="project-copy">
+            <div class="project-meta"><span>Used by a real business</span><span>Next.js · Supabase</span></div>
+            <h3>DentalMarket / DENTANOVA</h3>
+            <p class="project-tagline">From WhatsApp-only selling to a structured dental-supplies marketplace.</p>
+            <button class="project-open" type="button" data-project="dentalmarket">Examine case study <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+      </div>
+
+      <details class="project-archive reveal" id="project-archive">
+        <summary><span>Explore the complete project index</span><b>15 documented projects</b><i aria-hidden="true">+</i></summary>
+        <div class="archive-body">
+          <div class="archive-controls" role="group" aria-label="Filter projects">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="quant" aria-pressed="false">Quant</button>
+            <button type="button" data-filter="data" aria-pressed="false">Data &amp; AI</button>
+            <button type="button" data-filter="digital" aria-pressed="false">Digital systems</button>
+          </div>
+          <div class="archive-list" data-project-list aria-live="polite"></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section experience" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading reveal">
+        <p class="section-code">03 / PROFESSIONAL JOURNEY</p>
+        <div>
+          <h2 id="experience-title">Research rigor.<br><em>Operational context.</em></h2>
+          <p>Experience across an asset manager, enterprise data, and production business systems.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-row reveal">
+          <div class="timeline-date"><span>2026</span><p>Jun — Aug</p><i></i></div>
+          <div class="timeline-role"><p>Quantitative Research Intern — Fixed Income</p><h3>Sterling Asset Management</h3><span>Casablanca</span></div>
+          <ul>
+            <li>Worked with the Fixed Income Portfolio Manager on bond-market analysis, portfolio construction, and investment decisions.</li>
+            <li>Managed a virtual bond-portfolio case study from security selection through allocation and monitoring.</li>
+            <li>Researched Moroccan yield-curve forecasting with Dynamic Nelson–Siegel and time-series / machine-learning models using walk-forward validation.</li>
+          </ul>
+        </article>
+        <article class="timeline-row reveal">
+          <div class="timeline-date"><span>2025</span><p>Jun — Sep</p><i></i></div>
+          <div class="timeline-role"><p>Data Scientist Intern</p><h3>AKWA GROUP</h3><span>Casablanca</span></div>
+          <ul>
+            <li>Built an end-to-end machine-learning pipeline to detect and classify missing transaction records.</li>
+            <li>Handled preprocessing, feature engineering, model comparison, evaluation, and the path into an ERP data workflow.</li>
+          </ul>
+        </article>
+        <article class="timeline-row reveal">
+          <div class="timeline-date"><span>2025–26</span><p>Dec — Feb</p><i></i></div>
+          <div class="timeline-role"><p>IT Consultant — Management System</p><h3>Dwarven Industry</h3><span>Production</span></div>
+          <ul>
+            <li>Translated commercial operations into one role-aware system covering inventory, clients, suppliers, orders, quotations, and invoicing.</li>
+            <li>Connected the operating sequence from quote to order to invoice with dashboards and access controls.</li>
+          </ul>
+        </article>
+        <article class="timeline-row reveal">
+          <div class="timeline-date"><span>2026</span><p>Jul — Sep</p><i></i></div>
+          <div class="timeline-role"><p>IT Consultant — Commerce Platform</p><h3>DentalMarket / DENTANOVA</h3><span>Production</span></div>
+          <ul>
+            <li>Moved a WhatsApp-only sales process into a structured storefront while preserving the familiar order-confirmation channel.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section toolkit" id="toolkit" aria-labelledby="toolkit-title">
+      <div class="section-heading reveal">
+        <p class="section-code">04 / TECHNICAL TOOLKIT</p>
+        <div>
+          <h2 id="toolkit-title">A coherent stack,<br><em>not a cloud of logos.</em></h2>
+          <p>Methods and technologies evidenced across the work above, organized by the part of the problem they solve.</p>
+        </div>
+      </div>
+      <div class="toolkit-console reveal">
+        <div class="console-head"><span>SEK / CAPABILITY MAP</span><span>VERIFIED FROM PROJECT WORK</span></div>
+        <div class="toolkit-grid">
+          <article><span>01</span><h3>Finance &amp; Quantitative Methods</h3><p>Fixed income · Nelson–Siegel · derivatives pricing · portfolio construction · risk analytics · econometrics · backtesting</p></article>
+          <article><span>02</span><h3>Programming &amp; Analysis</h3><p>Python · TypeScript · JavaScript · SQL · pandas · NumPy · SciPy · statsmodels</p></article>
+          <article><span>03</span><h3>Data Engineering</h3><p>PostgreSQL · Supabase · Prisma · Drizzle · data pipelines · data quality · migrations · row-level security</p></article>
+          <article><span>04</span><h3>Machine Learning &amp; AI</h3><p>scikit-learn · XGBoost · PyTorch · BERTweet · anomaly detection · embeddings · FAISS · RAG</p></article>
+          <article><span>05</span><h3>Applications &amp; Delivery</h3><p>Next.js · React · FastAPI · Streamlit · Docker · Vercel · Vitest · pytest</p></article>
+          <article><span>06</span><h3>Research Discipline</h3><p>Walk-forward validation · chronological splits · leakage control · baseline comparison · explicit limitations</p></article>
+        </div>
+        <div class="console-flow" aria-hidden="true"><span>QUESTION</span><i>→</i><span>DATA</span><i>→</i><span>MODEL</span><i>→</i><span>VALIDATION</span><i>→</i><span>DECISION</span></div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="about-media reveal">
+        <figure class="about-portrait">
+          <img src="/assets/sifeddine-profile.jpg" alt="Portrait of Sifeddine El Kadiri" width="896" height="1200" loading="lazy">
+          <figcaption><span>SEK / PORTRAIT</span><span>Data &amp; Finance</span></figcaption>
+        </figure>
+        <figure class="about-speaking">
+          <img src="/assets/sifeddine-speaking.jpeg" alt="Sifeddine El Kadiri speaking at a lectern" width="400" height="400" loading="lazy">
+          <figcaption>Communication is part of the engineering.</figcaption>
+        </figure>
+      </div>
+      <div class="about-copy reveal">
+        <p class="section-code">05 / ABOUT &amp; EDUCATION</p>
+        <h2 id="about-title">I work at the intersection of <em>finance, data, and intelligent systems.</em></h2>
+        <p class="about-lead">The common thread is decision quality: how a model is validated, how data moves through a system, and how technical work becomes useful in a real operating context.</p>
+        <p>At ENSIAS, I am completing an Engineering Degree in Data &amp; Finance. My work moves between quantitative research, applied machine learning, and production software—disciplines that become more valuable when they inform one another.</p>
+        <div class="education-card">
+          <span>EDU / 01</span>
+          <div><h3>ENSIAS</h3><p>Engineering Degree — Data &amp; Finance</p></div>
+          <div><strong>Expected June 2027</strong><p>Rabat, Morocco</p></div>
+        </div>
+        <blockquote>“Finance gives me the questions. Data gives me evidence. Engineering makes the answer useful.”</blockquote>
+      </div>
+    </section>
+
+    <section class="section resume" id="resume" aria-labelledby="resume-title">
+      <div class="resume-grid reveal">
+        <p class="section-code">06 / RESUME</p>
+        <div>
+          <p class="resume-kicker">For recruiters &amp; collaborators</p>
+          <h2 id="resume-title">The concise version<br>of the <em>whole system.</em></h2>
+        </div>
+        <div class="resume-action">
+          <p>A public CV file is not currently included in this portfolio. Request the latest copy directly and I’ll share the appropriate version.</p>
+          <a class="button button-light" href="mailto:elkadirisifeddine@gmail.com?subject=CV%20request%20—%20Sifeddine%20El%20Kadiri">Request my CV <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-grid">
+        <div class="contact-copy reveal">
+          <p class="section-code">07 / LET’S CONNECT</p>
+          <p class="contact-status"><i></i> Exploring internship opportunities from January 2027</p>
+          <h2 id="contact-title">Bring the problem.<br><em>I’ll bring structure.</em></h2>
+          <p>Quantitative research, financial data, applied machine learning, or a system that needs to become dependable—let’s talk.</p>
+          <a class="contact-email" href="mailto:elkadirisifeddine@gmail.com?subject=Let’s%20work%20together">elkadirisifeddine@gmail.com <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-channels reveal">
+          <a href="https://www.linkedin.com/in/sifeddine-el-kadiri-097235390/" target="_blank" rel="noreferrer"><span>01 / PROFESSIONAL NETWORK</span><strong>LinkedIn</strong><i aria-hidden="true">↗</i></a>
+          <a href="https://github.com/addicteduser04" target="_blank" rel="noreferrer"><span>02 / SOURCE &amp; RESEARCH</span><strong>GitHub</strong><i aria-hidden="true">↗</i></a>
+          <a href="mailto:elkadirisifeddine@gmail.com"><span>03 / DIRECT CHANNEL</span><strong>Email</strong><i aria-hidden="true">↗</i></a>
+        </div>
+      </div>
+      <footer class="site-footer">
+        <span>© <b data-year>2026</b> Sifeddine El Kadiri</span>
+        <span>Data &amp; Finance Engineer</span>
+        <a href="#top">Back to top ↑</a>
       </footer>
     </section>
-  </div>
-  <p id="view-status" class="sr-only" aria-live="polite"></p>
-  <div class="route-progress" aria-hidden="true"></div>
+  </main>
+
+  <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-shell">
+      <div class="dialog-rail">
+        <span>CASE STUDY / SEK</span>
+        <button type="button" data-dialog-close aria-label="Close case study">Close <i aria-hidden="true">×</i></button>
+      </div>
+      <div class="dialog-content" data-dialog-content></div>
+    </div>
+  </dialog>
+
+  <div class="sr-only" aria-live="polite" data-live-region></div>
 </body>
 </html>

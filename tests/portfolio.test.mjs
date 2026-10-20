@@ -39,6 +39,12 @@ test("the homepage is unified and the tailor view is fully removed", () => {
   const order = ["top", "experience", "work", "profiles", "skills", "contact"].map((id) => html.indexOf(`id="${id}"`));
   assert.deepEqual(order, [...order].sort((a, b) => a - b), "homepage follows the intended recruiter flow");
   assert.doesNotMatch(source, /project-dialog|data-project=/, "project overlays are fully removed");
+  const intro = html.match(/class="hero-intro[^"]*"[^>]*>([^<]+)</)?.[1] || "";
+  const wordCount = intro.trim().split(/\s+/).length;
+  assert.ok(wordCount >= 40 && wordCount <= 60, `hero introduction is concise (${wordCount} words)`);
+  assert.match(html, /Explore Sterling research/);
+  assert.match(html, /Explore AKWA case study/);
+  assert.equal((html.match(/<strong>Outcome<\/strong>/g) || []).length, 2);
 });
 
 test("the supplied video and authentic poster are wired for efficient playback", () => {
@@ -86,8 +92,35 @@ test("all 15 projects have static, indexable, revision-pinned case studies", () 
     assert.match(page, /Evidence revision/);
     assert.match(page, /Pinned revision/);
     assert.match(page, /MISSING EVIDENCE/);
+    assert.match(page, /02 \/ MY CONTRIBUTION/);
+    assert.match(page, /03 \/ TECHNICAL APPROACH/);
   }
   assert.match(read("PROJECT_AUDIT.md"), /\| Project \| GitHub Repository \| README Found \| Case Study Route \| Missing Evidence \|/);
+});
+
+test("verified numerical results use accessible comparison tables", () => {
+  for (const slug of ["nelson-siegel", "equity-crash", "market-regimes", "black-scholes"]) {
+    const page = read(`projects/${slug}/index.html`);
+    assert.match(page, /<table class="evidence-table">/);
+    assert.match(page, /<caption>.+<\/caption>/);
+    assert.match(page, /<th scope="col">/);
+    assert.match(page, /<th scope="row">/);
+  }
+});
+
+test("case-study documents have valid in-page navigation, image text, and local assets", () => {
+  const documents = [
+    ...projects.map((project) => `projects/${project.slug}/index.html`),
+    "experience/sterling-asset-management/index.html",
+    "experience/akwa-group/index.html"
+  ];
+  for (const document of documents) {
+    const page = read(document);
+    const ids = new Set([...page.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
+    for (const [, anchor] of page.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.has(anchor), `${document} resolves #${anchor}`);
+    for (const [image] of page.matchAll(/<img\b[^>]*>/g)) assert.match(image, /\salt="[^"]+"/, `${document} image has useful alt text`);
+    for (const [, asset] of page.matchAll(/(?:src|poster)="(\/assets\/[^"?#]+)"/g)) assert.ok(fs.existsSync(`${rootPath}${asset}`), `${document} resolves ${asset}`);
+  }
 });
 
 test("featured internships have dedicated disclosure-safe routes", () => {

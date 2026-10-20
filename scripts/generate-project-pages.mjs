@@ -14,6 +14,11 @@ const list = (items = []) => `<ul>${items.map((item) => `<li>${escapeHtml(item)}
 const tags = (items = []) => `<ul class="case-tags" aria-label="Technologies">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 const revisionUrl = (project, revision) => `${project.github}/tree/${revision}`;
 
+function metricTable(metrics) {
+  if (!metrics?.headers?.length || !metrics?.rows?.length) return "";
+  return `<div class="evidence-table-wrap"><table class="evidence-table"><caption>${escapeHtml(metrics.caption)}</caption><thead><tr>${metrics.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${metrics.rows.map((row) => `<tr>${row.map((cell, index) => index === 0 ? `<th scope="row">${escapeHtml(cell)}</th>` : `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
 function architecture(project, details) {
   const nodes = (project.architecture || []).slice(0, 6);
   return `<figure class="architecture-map" aria-labelledby="architecture-caption">
@@ -65,14 +70,14 @@ function page(project) {
       ${media(project)}
     </section>
     <div class="case-layout">
-      <aside class="case-toc"><p>ON THIS PAGE</p><nav><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#architecture">Architecture</a><a href="#methodology">Methodology</a>${tocFormula}<a href="#results">Results</a><a href="#limitations">Limitations</a><a href="#demonstrates">Demonstrates</a><a href="#sources">Sources</a></nav></aside>
+      <aside class="case-toc"><p>ON THIS PAGE</p><nav><a href="#problem">Problem</a><a href="#contribution">My contribution</a><a href="#approach">Technical approach</a><a href="#methodology">Methodology</a>${tocFormula}<a href="#results">Results</a><a href="#limitations">Limitations</a><a href="#demonstrates">Demonstrates</a><a href="#sources">Sources</a></nav></aside>
       <article class="case-article">
         <section class="case-section" id="problem"><p class="case-index">01 / PROBLEM STATEMENT</p><h2>Why this work exists</h2><p class="case-lead">${escapeHtml(details.motivation)}</p><h3>Data and source material</h3>${list(details.data)}</section>
-        <section class="case-section" id="solution"><p class="case-index">02 / SOLUTION OVERVIEW</p><h2>From input to usable output</h2><p>${escapeHtml(project.solution)}</p><ol class="workflow">${details.workflow.map((item, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span><p>${escapeHtml(item)}</p></li>`).join("")}</ol></section>
-        <section class="case-section" id="architecture"><p class="case-index">03 / TECHNICAL ARCHITECTURE</p><h2>Implemented components</h2>${architecture(project, details)}</section>
-        <section class="case-section" id="methodology"><p class="case-index">04 / METHODOLOGY &amp; IMPLEMENTATION</p><h2>Decisions that shape the system</h2>${list(details.methodology)}<div class="implementation-notes"><h3>Implemented capabilities</h3>${list(project.features)}</div></section>
+        <section class="case-section contribution-section" id="contribution"><p class="case-index">02 / MY CONTRIBUTION</p><h2>What I implemented</h2><p class="case-lead">${escapeHtml(project.solution)}</p><div class="implementation-notes"><h3>Implemented capabilities</h3>${list(project.features)}</div></section>
+        <section class="case-section" id="approach"><p class="case-index">03 / TECHNICAL APPROACH</p><h2>From input to usable output</h2><ol class="workflow">${details.workflow.map((item, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span><p>${escapeHtml(item)}</p></li>`).join("")}</ol>${architecture(project, details)}</section>
+        <section class="case-section" id="methodology"><p class="case-index">04 / METHODOLOGY &amp; IMPLEMENTATION</p><h2>Decisions that shape the system</h2>${list(details.methodology)}</section>
         ${formula}
-        <section class="case-section results-section" id="results"><p class="case-index">05 / RESULTS &amp; EVIDENCE</p><h2>What the source supports</h2>${list(details.results)}<p class="evidence-rule">Results preserve the repository’s units, evaluation framing, and stated limitations. Missing evidence is not converted into a claim.</p></section>
+        <section class="case-section results-section" id="results"><p class="case-index">05 / RESULTS &amp; EVIDENCE</p><h2>What the source supports</h2>${metricTable(details.metrics)}${list(details.results)}<p class="evidence-rule">Results preserve the repository’s units, evaluation framing, and stated limitations. Missing evidence is not converted into a claim.</p></section>
         <section class="case-section" id="limitations"><p class="case-index">06 / CHALLENGES &amp; LIMITATIONS</p><h2>Where the evidence stops</h2>${list(details.limitations)}<aside class="missing-evidence"><span>MISSING EVIDENCE</span><p>${escapeHtml(details.missing)}</p></aside></section>
         <section class="case-section demonstrates-section" id="demonstrates"><p class="case-index">07 / WHAT THIS DEMONSTRATES</p><h2>Engineering signal</h2><p class="case-lead">${escapeHtml(details.demonstrates)}</p></section>
         <section class="case-section" id="sources"><p class="case-index">08 / SOURCE &amp; RELATED WORK</p><h2>Trace the evidence</h2><div class="source-card"><div><span>Repository</span><a href="${escapeHtml(project.github)}" target="_blank" rel="noreferrer">${escapeHtml(project.repo)} ↗</a></div><div><span>Pinned revision</span><a href="${revisionUrl(project, details.revision)}" target="_blank" rel="noreferrer"><code>${details.revision}</code> ↗</a></div><div><span>Audited files</span><p>${details.sources.map(escapeHtml).join(" · ")}</p></div></div><div class="related-grid">${related(project)}</div></section>

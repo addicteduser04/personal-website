@@ -9,7 +9,7 @@
       projectIntro: "Research selected for fixed-income modelling, portfolio construction, derivatives, and risk analytics.",
       projects: ["nelson-siegel", "market-regimes", "black-scholes", "equity-crash", "portfolio-optimization", "saifinvest"],
       experience: [
-        { period: "Jun — Aug 2026", role: "Quantitative Research Intern — Fixed Income", org: "Sterling Asset Management", place: "Casablanca", points: ["Worked with the Fixed Income Portfolio Manager on bond-market analysis, portfolio construction, and investment decisions.", "Managed a virtual bond-portfolio case study from security selection through allocation and monitoring.", "Researched Moroccan yield-curve forecasting with Dynamic Nelson–Siegel and time-series / machine-learning models using walk-forward validation."] },
+        { period: "Jun — Aug 2026", role: "Quantitative Research Intern — Fixed Income", org: "Sterling Asset Management", place: "Casablanca", href: "/experience/sterling-asset-management", points: ["Worked with the Fixed Income Portfolio Manager on bond-market analysis, portfolio construction, and investment decisions.", "Managed a virtual bond-portfolio case study from security selection through allocation and monitoring.", "Researched Moroccan yield-curve forecasting with Dynamic Nelson–Siegel and time-series / machine-learning models using walk-forward validation."] },
         { period: "Expected Jun 2027", role: "Engineering Degree — Data & Finance", org: "ENSIAS", place: "Rabat", points: ["Academic foundation spanning stochastic calculus, derivatives pricing, time series, numerical methods, econometrics, probability, and statistics."] }
       ],
       skills: [
@@ -28,8 +28,8 @@
       projectIntro: "Work selected for machine learning, NLP, anomaly detection, predictive analytics, and dependable data flows.",
       projects: ["equity-crash", "stocktwits", "audit-intelligent", "financial-rag", "market-regimes", "trading-lab"],
       experience: [
-        { period: "Jun — Sep 2025", role: "Data Scientist Intern", org: "AKWA GROUP", place: "Casablanca", points: ["Built an end-to-end machine-learning pipeline to detect and classify missing transaction records.", "Handled preprocessing, feature engineering, model comparison, evaluation, and the path into an ERP data workflow."] },
-        { period: "Jun — Aug 2026", role: "Quantitative Research Intern — Fixed Income", org: "Sterling Asset Management", place: "Casablanca", points: ["Applied time-series and machine-learning methods to Moroccan yield-curve forecasting with chronological walk-forward validation."] },
+        { period: "Jun — Sep 2025", role: "Data Scientist Intern", org: "AKWA GROUP", place: "Casablanca", href: "/experience/akwa-group", points: ["Built an end-to-end machine-learning pipeline to detect and classify missing transaction records.", "Handled preprocessing, feature engineering, model comparison, evaluation, and the path into an ERP data workflow."] },
+        { period: "Jun — Aug 2026", role: "Quantitative Research Intern — Fixed Income", org: "Sterling Asset Management", place: "Casablanca", href: "/experience/sterling-asset-management", points: ["Applied time-series and machine-learning methods to Moroccan yield-curve forecasting with chronological walk-forward validation."] },
         { period: "Expected Jun 2027", role: "Engineering Degree — Data & Finance", org: "ENSIAS", place: "Rabat", points: ["Academic foundation in machine learning, deep learning, econometrics, time series, probability, and statistics."] }
       ],
       skills: [
@@ -48,9 +48,9 @@
       projectIntro: "Production and product work selected for enterprise workflows, systems integration, automation, and full-stack delivery.",
       projects: ["dwarven-industry", "dentalmarket", "saifinvest", "audit-intelligent", "digital-mind", "parfum-house"],
       experience: [
-        { period: "Dec 2025 — Feb 2026", role: "IT Consultant — Management System", org: "Dwarven Industry", place: "Production", points: ["Translated commercial operations into one role-aware system covering inventory, clients, suppliers, orders, quotations, and invoicing.", "Connected the operating sequence from quote to order to invoice with dashboards and access controls."] },
-        { period: "Jul — Sep 2026", role: "IT Consultant — Commerce Platform", org: "DentalMarket / DENTANOVA", place: "Production", points: ["Moved a WhatsApp-only sales process into a structured storefront while preserving the familiar order-confirmation channel."] },
-        { period: "Jun — Sep 2025", role: "Data Scientist Intern", org: "AKWA GROUP", place: "Casablanca", points: ["Built a machine-learning workflow around missing enterprise transaction records and their path into an ERP data process."] }
+        { period: "Dec 2025 — Feb 2026", role: "IT Consultant — Management System", org: "Dwarven Industry", place: "Production", href: "/projects/dwarven-industry", points: ["Translated commercial operations into one role-aware system covering inventory, clients, suppliers, orders, quotations, and invoicing.", "Connected the operating sequence from quote to order to invoice with dashboards and access controls."] },
+        { period: "Jul — Sep 2026", role: "IT Consultant — Commerce Platform", org: "DentalMarket / DENTANOVA", place: "Production", href: "/projects/dentalmarket", points: ["Moved a WhatsApp-only sales process into a structured storefront while preserving the familiar order-confirmation channel."] },
+        { period: "Jun — Sep 2025", role: "Data Scientist Intern", org: "AKWA GROUP", place: "Casablanca", href: "/experience/akwa-group", points: ["Built a machine-learning workflow around missing enterprise transaction records and their path into an ERP data process."] }
       ],
       skills: [
         ["Consulting & discovery", "Requirements · workflow design · process mapping · operational KPIs"],
@@ -98,7 +98,7 @@
   if (experienceList) {
     experienceList.innerHTML = profile.experience.map((role) => `<article class="profile-role reveal">
       <div><span>${escapeHtml(role.period)}</span><small>${escapeHtml(role.place)}</small></div>
-      <header><p>${escapeHtml(role.role)}</p><h3>${escapeHtml(role.org)}</h3></header>
+      <header><p>${escapeHtml(role.role)}</p><h3>${role.href ? `<a href="${escapeHtml(role.href)}">${escapeHtml(role.org)}</a>` : escapeHtml(role.org)}</h3>${role.href ? `<a class="profile-role-link" href="${escapeHtml(role.href)}">View evidence <span aria-hidden="true">→</span></a>` : ""}</header>
       <ul>${role.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul>
     </article>`).join("");
   }

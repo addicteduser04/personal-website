@@ -52,6 +52,9 @@ test("profile content is curated, factual, and CV-safe", () => {
   assert.doesNotMatch(publicCopy, /href="[^"]+\.pdf"|download=/i);
   assert.match(publicCopy, /Request (?:quant |data |consulting )?CV/i);
   assert.match(profileScript, /href="\/projects\/\$\{escapeHtml\(project\.slug\)\}"/);
+  assert.match(profileScript, /href: "\/experience\/sterling-asset-management"/);
+  assert.match(profileScript, /href: "\/experience\/akwa-group"/);
+  assert.match(profileScript, /class="profile-role-link"/);
 });
 
 test("Vercel serves profiles without homepage redirects and sitemap lists them", () => {
